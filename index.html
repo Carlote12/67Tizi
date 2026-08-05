@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizibot</title>
+
+    <style>
+        /* =======================================================
+           PALETA DE COLORES (EXTRAÍDA DE LA IMAGEN)
+           ======================================================= */
+        :root {
+            --bg-color: #faf8f2;         /* Fondo crema exacto de la imagen */
+            --card-bg: #ffffff;          /* Fondo blanco de tarjetas y tablas */
+            --text-main: #2b2623;        /* Texto principal (marrón muy oscuro) */
+            --text-light: #918981;       /* Texto secundario / metadatos */
+            --accent-orange: #d9822b;    /* Naranja/marrón cálido de "01 · LA IDEA" */
+            --accent-yellow: #f3b712;    /* Amarillo dorado vibrante para las etiquetas */
+            --border-light: #ede8dc;     /* Línea divisora suave */
+            --code-bg: #2b2623;          /* Fondo oscuro para código */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* --- ENCABEZADO E IMAGEN PRINCIPAL --- */
+        .hero-img {
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center 30%;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin: 25px 0 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--accent-yellow);
+            color: #111;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 10px 0;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        /* --- SECCIONES Y DIVISIONES --- */
+        section {
+            margin-bottom: 35px;
+        }
+
+        .section-label {
+            color: var(--accent-orange);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-light);
+            margin: 40px 0;
+        }
+
+        /* --- TABLA DE MATERIALES --- */
+        .materials-table {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .materials-table th, .materials-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .materials-table th {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 700;
+            background-color: #f5f2e9;
+            text-transform: uppercase;
+        }
+
+        /* --- GALERÍA / EVIDENCIA --- */
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+
+        .evidence-img, .evidence-video {
+            width: 100%;
+            height: 260px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .evidence-img {
+            object-fit: cover;
+        }
+
+        .evidence-video {
+            object-fit: contain;
+            background-color: #000;
+        }
+
+        /* --- INSTRUCTIVO PASO A PASO --- */
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: var(--accent-orange);
+            color: white;
+            min-width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0 0 5px 0;
+        }
+
+        .step-desc {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* --- CÓDIGO Y ALERTAS --- */
+        .code-block {
+            background-color: var(--code-bg);
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Fira Code', 'Courier New', Courier, monospace;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .alert-box {
+            background-color: #fbf5e6;
+            border-left: 5px solid var(--accent-yellow);
+            color: var(--text-main);
+            padding: 18px 20px;
+            border-radius: 4px 12px 12px 4px;
+            margin-bottom: 20px;
+        }
+
+        .todo-box {
+            background-color: #fdf6ee;
+            border: 2px dashed var(--accent-orange);
+            border-radius: 12px;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .todo-title {
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- VIDEO CONTAINER --- */
+        .video-container {
+            width: 100%;
+            background-color: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-height: 500px;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <img src="67.jpeg" alt="Robot Tizibot listo para la acción" class="hero-img">
+
+    <div class="tags">
+        <span class="tag">R-01</span>
+        <span class="tag">Robotica</span>
+    </div>
+
+    <h1>Tizibot</h1>
+    <p class="subtitle">Robot creado por tizi del Club Steam</p>
+    <div class="author-info">
+        <span>•</span>
+        <span>Club STEAM Villa Carlos Paz</span>
+        <span>•</span>
+        <span>2026</span>
+    </div>
+
+    <hr>
+
+    <section>
+        <div class="section-label">01 · LA IDEA</div>
+        <h2 style="margin-bottom: 5px;">¿Cuál es el objetivo del proyecto?</h2>
+        <p>El objetivo principal de <strong>Tizibot</strong> es aprender sobre robotica, control mediante Bluetooth y como programar</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">02 ·FUNCIONAMIENTO</div>
+        <h2>¿Cómo funciona el Tizibot?</h2>
+        <p>El robot establece una conexión Bluetooth Serial con una app móvil personalizada. Cada comando enviado (Avanzar, Retroceder, Girar o Detener) es interpretado instantáneamente por el microprocesador de la placa ESP32, la cual envía señales digitales y de pulso al puente H (L298N) para regular la dirección y fuerza de los motores.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">03 · COMPONENTES Y MATERIALES</div>
+        <h2>Hardware requerido</h2>
+        
+        <table class="materials-table">
+            <thead>
+                <tr>
+                    <th>COMPONENTE</th>
+                    <th>CANT.</th>
+                    <th>FUNCIÓN EN EL SISTEMA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Placa ESP32 30P</td>
+                    <td>1</td>
+                    <td>Microcontrolador principal con módulos de red y Bluetooth integrados.</td>
+                </tr>
+                <tr>
+                    <td>Módulo Puente H L298N</td>
+                    <td>1</td>
+                    <td>Controlador de potencia para manejar sentido e intensidad de motores.</td>
+                </tr>
+                <tr>
+                    <td>Motorreductores con ruedas (3-6V)</td>
+                    <td>2</td>
+                    <td>Generan el par de apriete y tracción para desplazar la estructura.</td>
+                </tr>
+                <tr>
+                    <td>Rueda Loca (Caster Wheel)</td>
+                    <td>1</td>
+                    <td>Punto de apoyo omnidireccional para mantener estabilidad y libre giro.</td>
+                </tr>
+                <tr>
+                    <td>Chasis Acrílico / 3D</td>
+                    <td>1</td>
+                    <td>Base estructural para fijar baterías, placas y elementos mecánicos.</td>
+                </tr>
+                <tr>
+                    <td>Baterías Li-Ion 18650 (con portapilas)</td>
+                    <td>2</td>
+                    <td>Fuente de alimentación recargable e independiente (7.4V nominales).</td>
+                </tr>
+                <tr>
+                    <td>Cables Dupont (M-M / M-H)</td>
+                    <td>Set</td>
+                    <td>Interconexión de señal y alimentación entre los módulos.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">04 · REGISTRO MULTIMEDIA</div>
+        <h2>Galería de Pruebas</h2>
+        <div class="evidence-grid">
+            <video controls class="evidence-video">
+                <source src="RobotvideoWiwi.mp4" type="video/mp4">
+                Tu navegador no soporta el formato de video.
+            </video>
+            <img src="Fotowiwi1.jpeg" alt="Detalle del ensamblado del robot Tizibot" class="evidence-img">
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">05 · GUÍA DE CONSTRUCCIÓN</div>
+        <h2>Paso a paso del ensamblaje</h2>
+        
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <div class="step-title">Montaje del Chasis Mecánico</div>
+                <p class="step-desc">Fijar los motorreductores a los costados del chasis con sus soportes. Atornillar la rueda loca en la parte frontal/trasera para nivelar la estructura.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <div class="step-title">Cableado del Sistema de Potencia</div>
+                <p class="step-desc">Conectar las terminales de los motores al módulo L298N. Enlazar la salida de las baterías al puente H y alimentar la placa ESP32 mediante el pin VIN/5V.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <div class="step-title">Lógica de Control (GPIOs)</div>
+                <p class="step-desc">Conectar los pines digitales del ESP32 a las entradas IN1, IN2, IN3 e IN4 del driver de motores para gestionar la dirección del giro.</p>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <div class="step-title">Programación y Testeo Inalámbrico</div>
+                <p class="step-desc">Flashgear el código en la ESP32 usando Arduino IDE, vincular con la app de control Bluetooth en el móvil y calibrar la respuesta del motor.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">06 · CÓDIGO Y ARCHIVOS</div>
+        <h2>Firmware Base (Arduino / C++)</h2>
+        <p>A continuación se muestra una estructura simplificada del firmware encargado de recibir los comandos Bluetooth y accionar los motores:</p>
+        
+        <pre class="code-block"><code></code></pre>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">07 · RETOS Y APRENDIZAJES</div>
+        <h2>Desafíos superados</h2>
+        <div class="alert-box">
+            <strong>⚡ Diagnóstico de polaridad y caídas de voltaje:</strong> Descubrimos que al encender ambos motores al 100% de potencia, el ESP32 se reiniciaba por caídas de tensión. Lo solucionamos separando la línea de alimentación de los motores de la lógica de control e instalando un regulador adecuado.
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">08 · HOJA DE RUTA (ROADMAP)</div>
+        <h2>Próximas características (v3.0)</h2>
+        <div class="todo-box">
+            <div class="todo-title">🚀 Mejoras proyectadas:</div>
+            • <strong>Sistema Evitador de Obstáculos:</strong> Integrar sensor ultrasónico HC-SR04.<br>
+            • <strong>Telemetría y Luces:</strong> Añadir LEDs para señalización e indicadores de estado.<br>
+            • <strong>Control por Servomotor:</strong> Incorporar una pinza (gripper) móvil en el chasis.
+        </div>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">09 · CRÉDITOS</div>
+        <h2>Agradecimientos</h2>
+        <p>Un agradecimiento especial a los mentores del <strong>Club STEAM Villa Carlos Paz</strong> por guiarnos en el diseño de circuitos y la programación, y a todos los integrantes del equipo por la dedicación en el prototipado.</p>
+    </section>
+
+    <hr>
+
+    <section>
+        <div class="section-label">10 · DEMOSTRACIÓN EN ENTORNO REAL</div>
+        
+        <div class="video-container">
+            <video controls>
+                <source src="RobotvideoWiwi.mp4" type="video/mp4">
+                Tu navegador no soporta el reproductor de video.
+            </video>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
