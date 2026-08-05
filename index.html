@@ -7,16 +7,16 @@
 
     <style>
         /* =======================================================
-           PALETA DE COLORES (EXTRAÍDA DE LA IMAGEN)
+           PALETA DE COLORES
            ======================================================= */
         :root {
-            --bg-color: #faf8f2;         /* Fondo crema exacto de la imagen */
-            --card-bg: #ffffff;          /* Fondo blanco de tarjetas y tablas */
-            --text-main: #2b2623;        /* Texto principal (marrón muy oscuro) */
-            --text-light: #918981;       /* Texto secundario / metadatos */
-            --accent-orange: #d9822b;    /* Naranja/marrón cálido de "01 · LA IDEA" */
-            --accent-yellow: #f3b712;    /* Amarillo dorado vibrante para las etiquetas */
-            --border-light: #ede8dc;     /* Línea divisora suave */
+            --bg-color: #faf8f2;         /* Fondo crema */
+            --card-bg: #ffffff;          /* Fondo blanco */
+            --text-main: #2b2623;        /* Texto principal */
+            --text-light: #918981;       /* Texto secundario */
+            --accent-orange: #d9822b;    /* Naranja cálido */
+            --accent-yellow: #f3b712;    /* Amarillo dorado */
+            --border-light: #ede8dc;     /* Línea divisora */
             --code-bg: #2b2623;          /* Fondo oscuro para código */
         }
 
@@ -37,10 +37,10 @@
         /* --- ENCABEZADO E IMAGEN PRINCIPAL --- */
         .hero-img {
             width: 100%;
-            height: 500px;
+            height: 450px;
             border-radius: 16px;
             object-fit: cover;
-            object-position: center 30%;
+            object-position: center;
             display: block;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
@@ -142,20 +142,22 @@
             align-items: center;
         }
 
-        .evidence-img, .evidence-video {
-            width: 100%;
-            height: 260px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
         .evidence-img {
+            width: 100%;
+            height: 280px;
+            border-radius: 12px;
             object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
-        .evidence-video {
+        /* Foto de Tizi un poco más grande (280px de alto) */
+        .evidence-img-fit {
+            width: 100%;
+            height: 280px;
+            border-radius: 12px;
             object-fit: contain;
-            background-color: #000;
+            background-color: #f5f2e9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
         /* --- INSTRUCTIVO PASO A PASO --- */
@@ -294,7 +296,7 @@
 
     <section>
         <div class="section-label">03 · COMPONENTES Y MATERIALES</div>
-        <h2>Hardware requerido</h2>
+        <h2>¿Qué usaste para construirlo?</h2>
         
         <table class="materials-table">
             <thead>
@@ -306,39 +308,39 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Placa ESP32 30P</td>
+                    <td>Placa ESP32</td>
                     <td>1</td>
-                    <td>Microcontrolador principal con módulos de red y Bluetooth integrados.</td>
+                    <td>Es el cerebro del robot encargado de controlarlo.</td>
                 </tr>
                 <tr>
                     <td>Módulo Puente H L298N</td>
                     <td>1</td>
-                    <td>Controlador de potencia para manejar sentido e intensidad de motores.</td>
+                    <td>Controla la potencia para manejar el sentido y la intensidad de los motores.</td>
                 </tr>
                 <tr>
-                    <td>Motorreductores con ruedas (3-6V)</td>
+                    <td>Motorreductores con ruedas</td>
                     <td>2</td>
-                    <td>Generan el par de apriete y tracción para desplazar la estructura.</td>
+                    <td>Ruedas del Robot.</td>
                 </tr>
                 <tr>
-                    <td>Rueda Loca (Caster Wheel)</td>
+                    <td>Rueda delantera</td>
                     <td>1</td>
                     <td>Punto de apoyo omnidireccional para mantener estabilidad y libre giro.</td>
                 </tr>
                 <tr>
-                    <td>Chasis Acrílico / 3D</td>
+                    <td>Chasis de plástico</td>
                     <td>1</td>
                     <td>Base estructural para fijar baterías, placas y elementos mecánicos.</td>
                 </tr>
                 <tr>
-                    <td>Baterías Li-Ion 18650 (con portapilas)</td>
+                    <td>Baterías de vape modificados</td>
                     <td>2</td>
-                    <td>Fuente de alimentación recargable e independiente (7.4V nominales).</td>
+                    <td>Fuente de alimentación.</td>
                 </tr>
                 <tr>
-                    <td>Cables Dupont (M-M / M-H)</td>
-                    <td>Set</td>
-                    <td>Interconexión de señal y alimentación entre los módulos.</td>
+                    <td>Cables</td>
+                    <td>Varios</td>
+                    <td>Encargados de transportar la enería</td>
                 </tr>
             </tbody>
         </table>
@@ -347,14 +349,11 @@
     <hr>
 
     <section>
-        <div class="section-label">04 · REGISTRO MULTIMEDIA</div>
-        <h2>Galería de Pruebas</h2>
+        <div class="section-label">04 · Galería</div>
+        <h2>Fotos, diagramas o capturas</h2>
         <div class="evidence-grid">
-            <video controls class="evidence-video">
-                <source src="RobotvideoWiwi.mp4" type="video/mp4">
-                Tu navegador no soporta el formato de video.
-            </video>
-            <img src="Fotowiwi1.jpeg" alt="Detalle del ensamblado del robot Tizibot" class="evidence-img">
+            <img src="Tizibot.jpeg" alt="Tizibot.jpeg" class="evidence-img">
+            <img src="Tizifoto.jpeg" alt="Tizifoto.jpeg" class="evidence-img-fit">
         </div>
     </section>
 
@@ -362,37 +361,37 @@
 
     <section>
         <div class="section-label">05 · GUÍA DE CONSTRUCCIÓN</div>
-        <h2>Paso a paso del ensamblaje</h2>
+        <h2>Cómo replicarlo, paso a paso</h2>
         
         <div class="step-card">
             <div class="step-number">1</div>
             <div class="step-content">
-                <div class="step-title">Montaje del Chasis Mecánico</div>
-                <p class="step-desc">Fijar los motorreductores a los costados del chasis con sus soportes. Atornillar la rueda loca en la parte frontal/trasera para nivelar la estructura.</p>
+                <div class="step-title">Conseguí los materiales y armá el chasis</div>
+                <p class="step-desc">Fijá los motores a la base y ubicá los LEDs en la parte frontal o donde más te guste. Revisá el pinout del ESP32 para verificar qué pines vas a usar para los motores y cuáles para las luces.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-number">2</div>
             <div class="step-content">
-                <div class="step-title">Cableado del Sistema de Potencia</div>
-                <p class="step-desc">Conectar las terminales de los motores al módulo L298N. Enlazar la salida de las baterías al puente H y alimentar la placa ESP32 mediante el pin VIN/5V.</p>
+                <div class="step-title">Conexiones</div>
+Conectá los pines de control del puente H al ESP32. Luego, conectá los LEDs a sus respectivos pines digitales.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-number">3</div>
             <div class="step-content">
-                <div class="step-title">Lógica de Control (GPIOs)</div>
-                <p class="step-desc">Conectar los pines digitales del ESP32 a las entradas IN1, IN2, IN3 e IN4 del driver de motores para gestionar la dirección del giro.</p>
+                <div class="step-title">Cargá el programa en el ESP32</div>
+                <p class="step-desc">Copiá tu código y subilo a la placa. Recordá tener instaladas las tarjetas ESP32 en tu IDE de Arduino y configurar bien las variables que reciben las letras por Bluetooth.</p>
             </div>
         </div>
 
         <div class="step-card">
             <div class="step-number">4</div>
             <div class="step-content">
-                <div class="step-title">Programación y Testeo Inalámbrico</div>
-                <p class="step-desc">Flashgear el código en la ESP32 usando Arduino IDE, vincular con la app de control Bluetooth en el móvil y calibrar la respuesta del motor.</p>
+                <div class="step-title">Controlalo desde el celular</div>
+                <p class="step-desc">Controlalo desde el celular</p>
             </div>
         </div>
     </section>
@@ -400,9 +399,8 @@
     <hr>
 
     <section>
-        <div class="section-label">06 · CÓDIGO Y ARCHIVOS</div>
-        <h2>Firmware Base (Arduino / C++)</h2>
-        <p>A continuación se muestra una estructura simplificada del firmware encargado de recibir los comandos Bluetooth y accionar los motores:</p>
+        <div class="section-label">06 · CÓDIGO </div>
+        <p>cODIGO DEL ROBOT</p>
         
         <pre class="code-block"><code></code></pre>
     </section>
@@ -434,14 +432,13 @@
 
     <section>
         <div class="section-label">09 · CRÉDITOS</div>
-        <h2>Agradecimientos</h2>
-        <p>Un agradecimiento especial a los mentores del <strong>Club STEAM Villa Carlos Paz</strong> por guiarnos en el diseño de circuitos y la programación, y a todos los integrantes del equipo por la dedicación en el prototipado.</p>
+        <h2></h2>
     </section>
 
     <hr>
 
     <section>
-        <div class="section-label">10 · DEMOSTRACIÓN EN ENTORNO REAL</div>
+        <div class="section-label">10 · VIDEO</div>
         
         <div class="video-container">
             <video controls>
